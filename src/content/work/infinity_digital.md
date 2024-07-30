@@ -5,4 +5,7 @@ dateStart: "Oct 2023"
 dateEnd: "May 2024"
 ---
 
-Voluptatem est quaerat voluptas praesentium ipsa dolorem dignissimos nulla ratione distinctio quae maiores eligendi nostrum? Quibusdam, debitis voluptatum, lorem ipsum dolor. Sit amet consectetur adipisicing elit. Iure illo neque tempora.
+I worked on the backend side of a web platform, my responsibilities included designing
+and implementing a REST API, managing and optimizing the database for performance
+and scalability, and integrating various third-party services such as payment gateways
+and file storage solutions.
