@@ -109,13 +109,91 @@ const work = await Promise.all(
               {"/"}
             </li>
           ))}
-          <li class="line-clamp-1">
-            <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`}>
+          <li 
+            id="copy-button" 
+            class="line-clamp-1 flex items-center gap-x-2 cursor-pointer decoration-black/15 
+              dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 
+              text-current hover:text-black hover:dark:text-white transition-colors duration-300 
+              ease-in-out underline underline-offset-2"
+            >
+            <p aria-label={`Email ${SITE.NAME}`}>
               {SITE.EMAIL}
-            </Link>
+            </p>
+            <!-- copy icon -->
+            <svg 
+              id="copy-icon"
+              xmlns="http://www.w3.org/2000/svg" 
+              width="16" 
+              height="16" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="lucide lucide-copy"
+            >
+                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
+                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+            </svg>
+            <!-- check icon -->
+            <svg 
+              id="check-icon"
+              xmlns="http://www.w3.org/2000/svg" 
+              width="16" 
+              height="16" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              class="lucide lucide-check"
+              style="display: none;"
+            >
+                <path d="M20 6 9 17l-5-5"/>
+            </svg>
           </li>
         </ul>
       </section>
     </div>
   </Container>
 </PageLayout>
+
+<script>
+  async function copyToClipboard() {
+    if (!navigator.clipboard) {
+      console.warn("Clipboard API not available");
+      return false;
+    }
+    try {
+      await navigator.clipboard.writeText("lucascoppola21@gmail.com");
+      return true;
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+      return false;
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const copyButton = document.getElementById("copy-button");
+    const copyIcon = document.getElementById("copy-icon");
+    const checkIcon = document.getElementById("check-icon");
+
+    if (copyIcon && checkIcon && copyButton) {
+      copyButton.addEventListener("click", async () => {
+        const copied = await copyToClipboard();
+
+        if (copied) {
+          copyIcon.style.display = "none";
+          checkIcon.style.display = "block";
+
+          setTimeout(() => {
+            copyIcon.style.display = "block";
+            checkIcon.style.display = "none";
+          }, 2000);
+        }
+      });
+    }
+  });
+</script>
