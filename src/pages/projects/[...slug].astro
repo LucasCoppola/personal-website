@@ -52,16 +52,16 @@ const { Content } = await project.render();
           )}
         </nav>
     </div>
-    <iframe 
-      class="w-full h-80"
-      src={project.data.embedYT}
-      title="YouTube video player" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-      referrerpolicy="strict-origin-when-cross-origin" 
-      allowfullscreen >
-    </iframe>
     <article class="animate">
       <Content />
+      <iframe 
+        class="w-full h-80"
+        src={project.data.embedYT}
+        title="YouTube video player" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin" 
+        allowfullscreen>
+      </iframe>
     </article>
   </Container>
 </PageLayout>
