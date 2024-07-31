@@ -7,6 +7,6 @@ githubURL: "https://github.com/LucasCoppola/Thullo"
 embedYT: "https://www.youtube.com/embed/uZj6gNcjca0?si=xNhH7sJNTyVXKgt-"
 ---
 
-I was curious about how many of Trello's features worked, so I decided to create a simple clone to see how it works and if I was capable of doing it.
+I was curious about how many of Trello's features worked, so I decided to create a 'clone' to see how everything worked together.
 
 Take a look at the demo video to see all the features it has.
