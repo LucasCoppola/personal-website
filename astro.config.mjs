@@ -2,13 +2,13 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel/serverless";
+import vercelStatic from "@astrojs/vercel/static";
 
 export default defineConfig({
-  output: "server",
+  output: "static",
   site: "https://lucascoppola.vercel.app",
   integrations: [mdx(), sitemap(), tailwind()],
-  adapter: vercel({
+  adapter: vercelStatic({
     webAnalytics: { enabled: true },
   }),
 });
