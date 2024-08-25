@@ -39,7 +39,7 @@ const { Content } = await project.render();
         <nav class="animate flex gap-1">
           {project.data.URL && (
             <Link href={project.data.URL} external>
-              live
+              Live Project 
             </Link>
           )}
           {project.data.URL && project.data.githubURL && (
@@ -47,7 +47,7 @@ const { Content } = await project.render();
           )}
           {project.data.githubURL && (
             <Link href={project.data.githubURL} external>
-              github
+              Github
             </Link>
           )}
         </nav>
