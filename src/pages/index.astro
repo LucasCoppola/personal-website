@@ -70,6 +70,9 @@ const work = await Promise.all(
               <article>
                 <entry.Content />
               </article>
+            <div class="text-sm text-gray-700 dark:text-gray-200 mb-4">
+              <b>Technologies Used:</b> {entry.data.technologies.join(", ")}.
+            </div>
             </li>
           ))}
         </ul>
