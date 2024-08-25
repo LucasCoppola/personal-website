@@ -5,6 +5,7 @@ const work = defineCollection({
   schema: z.object({
     company: z.string(),
     role: z.string(),
+    technologies: z.array(z.string()),
     dateStart: z.coerce.date(),
     dateEnd: z.union([z.coerce.date(), z.string()]),
   }),
@@ -17,6 +18,7 @@ const projects = defineCollection({
     description: z.string(),
     date: z.coerce.date(),
     URL: z.string().optional(),
+    technologies: z.array(z.string()),
     githubURL: z.string().optional(),
     embedYT: z.string().optional(),
   }),

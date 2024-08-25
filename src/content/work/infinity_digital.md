@@ -1,8 +1,9 @@
 ---
 company: "Infinity Digital"
 role: "Backend Developer"
-dateStart: "Oct 2023"
-dateEnd: "May 2024"
+technologies: ["Typescript", "Node", "Express", "PostgreSQL"]
+dateStart: "Aug 2023"
+dateEnd: "Jul 2024"
 ---
 
 I worked on the backend side of a web platform, my responsibilities included designing
