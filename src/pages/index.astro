@@ -88,7 +88,7 @@ const work = await Promise.all(
           </Link>
         </div>
         <ul class="flex flex-col gap-4">
-          {projects.map(project => (
+          {projects.slice(0, 2).map((project) => (
             <li>
               <ArrowCard entry={project} />
             </li>
