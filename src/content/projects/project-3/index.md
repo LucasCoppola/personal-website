@@ -6,7 +6,7 @@ technologies:
   ["Typescript", "Nest.js", "React.js", "PostgreSQL", "Docker", "AWS EC2"]
 URL: "https://music-player.run.place"
 githubURL: "https://github.com/LucasCoppola/music-player"
-embedYT: "https://www.youtube.com/embed/V-WBgQDYISs?si=05OXr18ziNSL_b2f"
+embedYT: "https://www.youtube.com/embed/mLVSkgVaYSM?si=-o8BrOwneLfbv9hZ"
 ---
 
 A customizable music player where you can upload, organize, and play your own music.
