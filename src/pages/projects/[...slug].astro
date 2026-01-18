@@ -57,14 +57,16 @@ const { Content } = await project.render();
       <div class="text-sm text-gray-700 dark:text-gray-200 mb-4">
         <b>Technologies Used:</b> {project.data.technologies.join(", ")}.
       </div>
-      <iframe 
-        class="w-full h-80"
-        src={project.data.embedYT}
-        title="YouTube video player" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-        referrerpolicy="strict-origin-when-cross-origin" 
-        allowfullscreen>
-      </iframe>
+      {project.data.embedYT && (
+        <iframe 
+          class="w-full h-80"
+          src={project.data.embedYT}
+          title="YouTube video player" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          referrerpolicy="strict-origin-when-cross-origin" 
+          allowfullscreen>
+        </iframe>
+      )}
     </article>
   </Container>
 </PageLayout>
