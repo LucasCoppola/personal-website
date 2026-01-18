@@ -2,6 +2,7 @@
 title: "Music Player"
 description: "A customizable music player."
 date: "Aug 2024"
+order: 3
 technologies:
   ["Typescript", "Nest.js", "React.js", "PostgreSQL", "Docker", "AWS EC2"]
 URL: "https://music-player.run.place"

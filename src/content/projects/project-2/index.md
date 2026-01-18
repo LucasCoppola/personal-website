@@ -2,6 +2,7 @@
 title: "Thullo"
 description: "Thullo is a web app that allows you to create and share lists of tasks."
 date: "Aug 2023"
+order: 4
 technologies: ["Typescript", "Node", "Next.js", "PostgreSQL", "Vercel"]
 URL: "https://thullo-lc.vercel.app"
 githubURL: "https://github.com/LucasCoppola/Thullo"

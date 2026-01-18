@@ -2,6 +2,7 @@
 title: "SQL Database"
 description: "A SQL database engine built from scratch in C."
 date: "Jan 2026"
+order: 1
 technologies: ["C", "GCC", "Valgrind"]
 githubURL: "https://github.com/LucasCoppola/database.c"
 ---
