@@ -3,8 +3,7 @@ title: "Music Player"
 description: "A customizable music player."
 date: "Aug 2024"
 order: 3
-technologies:
-  ["Typescript", "Nest.js", "React.js", "PostgreSQL", "Docker", "AWS EC2"]
+technologies: ["TypeScript", "React", "NestJS", "PostgreSQL", "AWS"]
 URL: "https://music-player.run.place"
 githubURL: "https://github.com/LucasCoppola/music-player"
 embedYT: "https://www.youtube.com/embed/mLVSkgVaYSM?si=-o8BrOwneLfbv9hZ"

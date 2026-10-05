@@ -3,8 +3,11 @@ title: "Cashboard"
 description: "Monthly expense tracker for recurring payments and installments."
 date: "Aug 2026"
 order: 0
-technologies: ["TypeScript", "React", "Hono", "Cloudflare"]
+technologies: ["TypeScript", "React", "Hono", "Cloudflare D1", "Cloudflare"]
 URL: "https://cashboard.cc/"
+video: "/media/cashboard-demo.mp4"
+videoWebm: "/media/cashboard-demo.webm"
+videoPoster: "/media/cashboard-demo-poster.webp"
 ---
 
 Cashboard is a web app for tracking monthly recurring expenses, built to replace the spreadsheet I was previously using.

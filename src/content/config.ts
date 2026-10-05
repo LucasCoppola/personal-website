@@ -22,6 +22,9 @@ const projects = defineCollection({
     technologies: z.array(z.string()),
     githubURL: z.string().optional(),
     embedYT: z.string().optional(),
+    video: z.string().optional(),
+    videoWebm: z.string().optional(),
+    videoPoster: z.string().optional(),
   }),
 });
 
