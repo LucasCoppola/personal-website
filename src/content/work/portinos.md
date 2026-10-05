@@ -1,7 +1,7 @@
 ---
 company: "Portinos"
 role: "Full Stack Developer"
-technologies: ["Typescript", "Node.js", "Express", "Docker", "MySQL", "AWS S3","React", "Next.js"]
+technologies: ["Typescript", "Node", "Express", "Docker", "MySQL", "AWS S3","React", "Next.js"]
 dateStart: "May 2025"
 dateEnd: "Present"
 ---
