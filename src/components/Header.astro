@@ -1,20 +1,16 @@
 ---
 import Container from "@components/Container.astro";
-import Link from "@components/Link.astro";
+
+const pathname = Astro.url.pathname;
 ---
 
-<header>
+<header class="site-header">
   <Container>
-    <div class="flex flex-wrap gap-y-2 justify-between">
-      <Link href="/" underline={false}>
-        <div class="font-semibold">
-          Home
-        </div>
-      </Link>
-      <nav class="flex gap-1">
-        <Link href="/projects">
-          projects
-        </Link>
+    <div class="header-inner">
+      <a class="site-name" href="/">Lucas Coppola</a>
+      <nav class="header-nav" aria-label="Primary navigation">
+        <a href="/" aria-current={pathname === "/" ? "page" : undefined}>Home</a>
+        <a href="/projects" aria-current={pathname.startsWith("/projects") ? "page" : undefined}>Projects</a>
       </nav>
     </div>
   </Container>

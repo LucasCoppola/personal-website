@@ -3,80 +3,89 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import Container from "@components/Container.astro";
 import BackToPrev from "@components/BackToPrev.astro";
-import Link from "@components/Link.astro";
+import DatabasePipeline from "@components/DatabasePipeline.astro";
 
 export async function getStaticPaths() {
-  const projects = (await getCollection("projects"))
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  const projects = (await getCollection("projects")).sort(
+    (left, right) => right.data.date.valueOf() - left.data.date.valueOf(),
+  );
+
   return projects.map((project) => ({
     params: { slug: project.slug },
     props: project,
   }));
 }
+
 type Props = CollectionEntry<"projects">;
 
 const project = Astro.props;
 const { Content } = await project.render();
+const hasProjectMedia = Boolean(project.data.video || project.data.embedYT);
 ---
 
 <PageLayout title={project.data.title} description={project.data.description}>
   <Container>
-    <div class="animate">
-      <BackToPrev href="/projects">
-        Back to projects
-      </BackToPrev>
-    </div>
-    <div class="space-y-1 my-10">
-      <div class="animate text-2xl font-semibold text-black dark:text-white">
-        {project.data.title}
-      </div>
-        <nav class="animate flex gap-1">
-          {project.data.URL && (
-            <Link href={project.data.URL} external>
-              Live Project 
-            </Link>
-          )}
-          {project.data.URL && project.data.githubURL && (
-            <span>/</span>
-          )}
-          {project.data.githubURL && (
-            <Link href={project.data.githubURL} external>
-              Github
-            </Link>
-          )}
-        </nav>
-    </div>
-    <article>
-      {project.data.video && (
-        <video
-          class="mb-6 w-full aspect-video bg-black"
-          poster={project.data.videoPoster}
-          aria-label={`${project.data.title} product demonstration`}
-          autoplay
-          muted
-          loop
-          playsinline
-          controls
-          preload="metadata"
-        >
-          {project.data.videoWebm && <source src={project.data.videoWebm} type="video/webm" />}
-          <source src={project.data.video} type="video/mp4" />
-          Your browser does not support HTML video.
-        </video>
-      )}
-      {!project.data.video && project.data.embedYT && (
-        <iframe
-          class="mb-6 w-full aspect-video"
-          src={project.data.embedYT}
-          title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen>
-        </iframe>
-      )}
-      <Content />
-      <div class="text-sm text-gray-700 dark:text-gray-200 mb-4">
-        <b>Technologies Used:</b> {project.data.technologies.join(", ")}.
+    <article class="project-detail project-document-layout">
+      <aside class="project-document-sidebar">
+        <BackToPrev href="/projects">Back to projects</BackToPrev>
+
+        <div class="project-document-title">
+          <h1>{project.data.title}</h1>
+          <p>{project.data.description}</p>
+        </div>
+
+        <div class="project-detail-meta">
+          <span>Technologies</span>
+          <p>{project.data.technologies.join(" · ")}</p>
+        </div>
+
+        {(project.data.URL || project.data.githubURL) && (
+          <nav class="project-detail-links" aria-label="Project links">
+            {project.data.URL && <a href={project.data.URL} target="_blank" rel="noreferrer">Live project ↗</a>}
+            {project.data.githubURL && <a href={project.data.githubURL} target="_blank" rel="noreferrer">GitHub ↗</a>}
+          </nav>
+        )}
+      </aside>
+
+      <div class="project-document-content">
+        {project.data.video && (
+          <video
+            class="project-detail-media"
+            poster={project.data.videoPoster}
+            aria-label={`${project.data.title} product demonstration`}
+            autoplay
+            muted
+            loop
+            playsinline
+            controls
+            preload="metadata"
+          >
+            {project.data.videoWebm && <source src={project.data.videoWebm} type="video/webm" />}
+            <source src={project.data.video} type="video/mp4" />
+            Your browser does not support HTML video.
+          </video>
+        )}
+
+        {!project.data.video && project.data.embedYT && (
+          <iframe
+            class="project-detail-media"
+            src={project.data.embedYT}
+            title={`${project.data.title} demonstration`}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+          </iframe>
+        )}
+
+        {!hasProjectMedia && (
+          <div class="project-detail-pipeline">
+            <DatabasePipeline />
+          </div>
+        )}
+
+        <div class="project-detail-prose">
+          <Content />
+        </div>
       </div>
     </article>
   </Container>

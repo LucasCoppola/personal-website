@@ -7,200 +7,138 @@ import Link from "@components/Link.astro";
 import { dateRange } from "@lib/utils";
 import { SITE, HOME, SOCIALS } from "@consts";
 
-const projects = (await getCollection("projects"))
-.sort((a, b) => a.data.order - b.data.order);
-
-const allwork = (await getCollection("work"))
-  .sort((a, b) => new Date(b.data.dateStart).valueOf() - new Date(a.data.dateStart).valueOf());
-
-const work = await Promise.all(
-  allwork.map(async (item) => {
-    const { Content } = await item.render();
-    return { ...item, Content };
-  })
+const projects = (await getCollection("projects")).sort(
+  (left, right) => left.data.order - right.data.order,
 );
 
+const workEntries = (await getCollection("work")).sort(
+  (left, right) => right.data.dateStart.valueOf() - left.data.dateStart.valueOf(),
+);
+
+const work = await Promise.all(
+  workEntries.map(async (entry) => {
+    const { Content } = await entry.render();
+    return { ...entry, Content };
+  }),
+);
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <h4 class="animate font-semibold text-black dark:text-white">
-      Hi, I'm Lucas Coppola
-    </h4>
-    <div class="space-y-16">
-      <section>
-        <article class="space-y-4">
-          <p>
-            I'm a <b>Full Stack developer</b> with a focus on backend development. 
-            I love to build things and solve problems, I enjoy web development 
-            and do most of my work in the terminal. 
-          </p>
+    <section class="home-intro">
+      <h1>Hi, I'm<br />Lucas Coppola</h1>
+      <article class="intro-copy">
+        <p>
+          I'm a <b>Full Stack developer</b> with a focus on backend development.
+          I love to build things and solve problems, I enjoy web development
+          and do most of my work in the terminal.
+        </p>
 
-          <p>Besides coding, I have a strong interest in strength sports and training, 
-            which led me to create <Link href="/projects/project-1">Lift.</Link>
-          </p>
+        <p>Besides coding, I have a strong interest in strength sports and training,
+          which led me to create <Link href="/projects/project-1">Lift.</Link>
+        </p>
 
-          <p>
-            Most of my experience is in the <strong>Javascript</strong> ecosystem, especially
-            in backend development with <strong>Typescript</strong> and <strong>Node.js</strong>, 
-            utilizing SQL databases like <strong>PostgreSQL</strong>, <strong>MySQL</strong> and <strong>SQLite</strong>.  
-            <br/>
-            I also work with frontend technologies like <strong>React</strong> and <strong>Next.js</strong>. 
-          </p>
-        </article>
-      </section>
+        <p>
+          Most of my experience is in the <strong>Javascript</strong> ecosystem, especially
+          in backend development with <strong>Typescript</strong> and <strong>Node.js</strong>,
+          utilizing SQL databases like <strong>PostgreSQL</strong>, <strong>MySQL</strong> and <strong>SQLite</strong>.
+          <br />
+          I also work with frontend technologies like <strong>React</strong> and <strong>Next.js</strong>.
+        </p>
+      </article>
+    </section>
 
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Work Experience
-          </h5>
-        </div>
-        <ul class="flex flex-col space-y-4">
-          {work.map(entry => (
-            <li>
-              <div class="text-sm dark:opacity-75 font-serif">
-                {dateRange(entry.data.dateStart, entry.data.dateEnd)}
-              </div>
-              <div class="font-semibold text-black dark:text-white">
-                {entry.data.company}
-              </div>
-              <div class="text-sm dark:opacity-75 font-serif">
-                {entry.data.role}
-              </div>
-              <article>
-                <entry.Content />
-              </article>
-            <div class="text-sm text-gray-700 dark:text-gray-200 mb-4">
-              <b>Technologies Used:</b> {entry.data.technologies.join(", ")}.
+    <section class="portfolio-section" aria-labelledby="work-heading">
+      <div class="section-heading">
+        <h2 id="work-heading">Work Experience</h2>
+        <span>2023—Present</span>
+      </div>
+      <ol class="work-list">
+        {work.map((entry) => (
+          <li class="work-row">
+            <div class="work-date">{dateRange(entry.data.dateStart, entry.data.dateEnd)}</div>
+            <div class="work-position">
+              <h3>{entry.data.company}</h3>
+              <div>{entry.data.role}</div>
             </div>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Projects
-          </h5>
-          <Link href="/projects">
-            See all projects
-          </Link>
-        </div>
-        <ul class="flex flex-col gap-4">
-          {projects.slice(0, 2).map((project) => (
-            <li>
-              <ArrowCard entry={project} />
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section class="animate space-y-4">
-        <h5 class="font-semibold text-black dark:text-white">
-          Let's Connect
-        </h5>
-        <article>
-          <p>
-            If you want to get in touch with me about something or just to say hi,
-            reach out on social media or send me an email.
-          </p>
-        </article>
-        <ul class="flex flex-wrap gap-2">
-          {SOCIALS.map(SOCIAL => (
-            <li class="flex gap-x-2 text-nowrap">
-              <Link href={SOCIAL.HREF} external aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}>
-                {SOCIAL.NAME}
-              </Link>
-              {"/"}
-            </li>
-          ))}
-          <li 
-            id="copy-button" 
-            class="line-clamp-1 flex items-center gap-x-2 cursor-pointer decoration-black/15 
-              dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 
-              text-current hover:text-black hover:dark:text-white transition-colors duration-300 
-              ease-in-out underline underline-offset-2"
-            >
-            <p aria-label={`Email ${SITE.NAME}`}>
-              {SITE.EMAIL}
-            </p>
-            <!-- copy icon -->
-            <svg 
-              id="copy-icon"
-              xmlns="http://www.w3.org/2000/svg" 
-              width="16" 
-              height="16" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="lucide lucide-copy"
-            >
-                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
-                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
-            </svg>
-            <!-- check icon -->
-            <svg 
-              id="check-icon"
-              xmlns="http://www.w3.org/2000/svg" 
-              width="16" 
-              height="16" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              stroke-width="2" 
-              stroke-linecap="round" 
-              stroke-linejoin="round" 
-              class="lucide lucide-check"
-              style="display: none;"
-            >
-                <path d="M20 6 9 17l-5-5"/>
-            </svg>
+            <div class="work-copy">
+              <entry.Content />
+              <div class="technology-list">{entry.data.technologies.join(" · ")}</div>
+            </div>
           </li>
-        </ul>
-      </section>
-    </div>
+        ))}
+      </ol>
+    </section>
+
+    <section class="portfolio-section" aria-labelledby="projects-heading">
+      <div class="section-heading">
+        <h2 id="projects-heading">Projects</h2>
+        <Link href="/projects">See all projects</Link>
+      </div>
+      <div class="project-showcase">
+        {projects.slice(0, 2).map((project, index) => (
+          <ArrowCard entry={project} index={index + 1} variant="featured" />
+        ))}
+        {projects[2] && <ArrowCard entry={projects[2]} index={3} variant="technical" />}
+        <div class="compact-project-grid">
+          {projects.slice(3).map((project, index) => (
+            <ArrowCard entry={project} index={index + 4} variant="compact" />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="connect-section" aria-labelledby="connect-heading">
+      <div>
+        <h2 id="connect-heading">Let's Connect</h2>
+        <p>
+          If you want to get in touch with me about something or just to say hi,
+          reach out on social media or send me an email.
+        </p>
+      </div>
+      <div class="connect-links">
+        {SOCIALS.map((social) => (
+          <a href={social.HREF} target="_blank" rel="noreferrer" aria-label={`${SITE.NAME} on ${social.NAME}`}>
+            {social.NAME}
+          </a>
+        ))}
+        <button id="copy-email" type="button" data-email={SITE.EMAIL} data-copied="false">
+          <span data-copy-label>Email</span>
+          <span class="copy-icon-stack" aria-hidden="true">
+            <svg class="copy-icon" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"></path></svg>
+            <svg class="check-icon" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg>
+          </span>
+        </button>
+      </div>
+    </section>
   </Container>
 </PageLayout>
 
 <script>
-  async function copyToClipboard() {
-    if (!navigator.clipboard) {
-      console.warn("Clipboard API not available");
-      return false;
-    }
-    try {
-      await navigator.clipboard.writeText("lucascoppola21@gmail.com");
-      return true;
-    } catch (err) {
-      console.error("Failed to copy: ", err);
-      return false;
-    }
+  function initializeEmailCopy() {
+    const copyButton = document.querySelector<HTMLButtonElement>("#copy-email");
+    if (!copyButton || copyButton.dataset.initialized) return;
+
+    copyButton.dataset.initialized = "true";
+    copyButton.addEventListener("click", async () => {
+      const email = copyButton.dataset.email;
+      const label = copyButton.querySelector<HTMLElement>("[data-copy-label]");
+      if (!email || !label) return;
+
+      try {
+        await navigator.clipboard.writeText(email);
+        copyButton.dataset.copied = "true";
+        label.textContent = "Copied";
+        window.setTimeout(() => {
+          copyButton.dataset.copied = "false";
+          label.textContent = "Email";
+        }, 2000);
+      } catch {
+        window.location.href = `mailto:${email}`;
+      }
+    });
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const copyButton = document.getElementById("copy-button");
-    const copyIcon = document.getElementById("copy-icon");
-    const checkIcon = document.getElementById("check-icon");
-
-    if (copyIcon && checkIcon && copyButton) {
-      copyButton.addEventListener("click", async () => {
-        const copied = await copyToClipboard();
-
-        if (copied) {
-          copyIcon.style.display = "none";
-          checkIcon.style.display = "block";
-
-          setTimeout(() => {
-            copyIcon.style.display = "block";
-            checkIcon.style.display = "none";
-          }, 2000);
-        }
-      });
-    }
-  });
+  document.addEventListener("DOMContentLoaded", initializeEmailCopy);
+  document.addEventListener("astro:after-swap", initializeEmailCopy);
 </script>

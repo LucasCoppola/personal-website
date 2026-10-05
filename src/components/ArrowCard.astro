@@ -1,27 +1,53 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import DatabasePipeline from "@components/DatabasePipeline.astro";
 
 type Props = {
-  entry:  CollectionEntry<"projects">;
-}
+  entry: CollectionEntry<"projects">;
+  index?: number;
+  variant?: "featured" | "technical" | "compact";
+};
 
-const { entry } = Astro.props;
+const {
+  entry,
+  index = entry.data.order + 1,
+  variant = "compact",
+} = Astro.props;
+const projectNumber = String(index).padStart(2, "0");
 ---
 
-<a href={`/${entry.collection}/${entry.slug}`} class="relative group flex flex-nowrap py-3 px-4 pr-10 rounded-lg border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
-  <div class="flex flex-col flex-1 truncate">
-    <div class="font-semibold">
-      {entry.data.title}
+{variant === "technical" ? (
+  <a href={`/${entry.collection}/${entry.slug}`} class="technical-project-card">
+    <div class="technical-project-copy">
+      <span class="project-number">{projectNumber} / {entry.data.technologies.join(" · ")}</span>
+      <h3>{entry.data.title}</h3>
+      <p>{entry.data.description}</p>
     </div>
-    <div class="text-sm">
-      {entry.data.description}
+    <DatabasePipeline />
+  </a>
+) : variant === "featured" ? (
+  <a href={`/${entry.collection}/${entry.slug}`} class="featured-project-card">
+    {entry.data.videoPoster && (
+      <div class="project-preview">
+        <img src={entry.data.videoPoster} alt="" loading="lazy" />
+      </div>
+    )}
+    <div class="featured-project-meta">
+      <span class="project-number">{projectNumber}</span>
+      <div>
+        <h3>{entry.data.title}</h3>
+        <p>{entry.data.description}</p>
+      </div>
+      <svg class="project-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
     </div>
-  </div>
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    viewBox="0 0 24 24"
-    class="absolute top-1/2 right-2 -translate-y-1/2 size-5 stroke-2 fill-none stroke-current">
-    <line x1="5" y1="12" x2="19" y2="12" class="translate-x-3 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out" />
-    <polyline points="12 5 19 12 12 19" class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out" />
-  </svg>
-</a>
+  </a>
+) : (
+  <a href={`/${entry.collection}/${entry.slug}`} class="compact-project-card">
+    <span class="project-number">{projectNumber}</span>
+    <div>
+      <h3>{entry.data.title}</h3>
+      <p>{entry.data.description}</p>
+    </div>
+    <svg class="project-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+  </a>
+)}
