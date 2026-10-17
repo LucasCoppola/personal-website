@@ -1,13 +1,14 @@
 import type { Site, Metadata, Socials } from "@types";
 
 export const SITE: Site = {
-  NAME: "Lucas' Portfolio",
+  NAME: "Lucas Coppola",
   EMAIL: "lucascoppola21@gmail.com",
 };
 
 export const HOME: Metadata = {
-  TITLE: "Home",
-  DESCRIPTION: "Lucas Coppola's Portfolio",
+  TITLE: "Full Stack Developer",
+  DESCRIPTION:
+    "Lucas Coppola is a full stack developer focused on backend systems, TypeScript, Node.js, and SQL databases.",
 };
 
 export const WORK: Metadata = {
