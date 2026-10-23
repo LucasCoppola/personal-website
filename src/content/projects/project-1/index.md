@@ -4,7 +4,7 @@ description: "Plan training blocks, log workouts, and track progress in one conn
 date: "Jan 2024"
 order: 1
 technologies: ["TypeScript", "React", "Hono", "Turso", "Vercel"]
-URL: "https://lift-lc.vercel.app"
+URL: "https://lift.lcoppola.com"
 video: "/media/lift-demo.mp4"
 videoWebm: "/media/lift-demo.webm"
 videoPoster: "/media/lift-demo-poster.webp"

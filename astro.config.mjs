@@ -6,7 +6,7 @@ import vercelStatic from "@astrojs/vercel/static";
 
 export default defineConfig({
   output: "static",
-  site: "https://lucascoppola.vercel.app",
+  site: "https://lcoppola.com",
   integrations: [mdx(), sitemap(), tailwind()],
   adapter: vercelStatic({
     webAnalytics: { enabled: true },
