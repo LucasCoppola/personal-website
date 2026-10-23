@@ -1,5 +1,6 @@
 ---
 title: "Music Player"
+searchTitle: "Music Player — Customizable Web Music Player"
 description: "A customizable music player."
 date: "Aug 2024"
 order: 3

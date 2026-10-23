@@ -1,5 +1,6 @@
 ---
 title: "Thullo"
+searchTitle: "Thullo — Collaborative Task Boards"
 description: "Thullo is a web app that allows you to create and share lists of tasks."
 date: "Aug 2023"
 order: 4

@@ -23,7 +23,7 @@ const { Content } = await project.render();
 const hasProjectMedia = Boolean(project.data.video || project.data.embedYT);
 ---
 
-<PageLayout title={project.data.title} description={project.data.description}>
+<PageLayout title={project.data.searchTitle} description={project.data.description}>
   <Container>
     <article class="project-detail project-document-layout">
       <aside class="project-document-sidebar">

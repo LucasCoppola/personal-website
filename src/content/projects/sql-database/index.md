@@ -1,5 +1,6 @@
 ---
 title: "SQL Database"
+searchTitle: "SQL Database Engine Built in C"
 description: "A SQL database engine built from scratch in C."
 date: "Jan 2026"
 order: 2

@@ -1,5 +1,6 @@
 ---
 title: "Lift"
+searchTitle: "Lift — Training Block Planner and Workout Tracker"
 description: "Plan training blocks, log workouts, and track progress in one connected training record."
 date: "Jan 2024"
 order: 1

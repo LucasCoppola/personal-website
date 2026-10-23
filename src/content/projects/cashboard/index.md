@@ -1,5 +1,6 @@
 ---
 title: "Cashboard"
+searchTitle: "Cashboard — Monthly Expense Tracker"
 description: "Monthly expense tracker for recurring payments and installments."
 date: "Aug 2026"
 order: 0
